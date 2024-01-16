@@ -1,4 +1,9 @@
-// game.js
+document.getElementById('game-container').addEventListener('click', function (event) {
+    if (event.target.id === 'myButton') {
+        alert('Button Clicked!');
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     // initialize game
     loadGame();
