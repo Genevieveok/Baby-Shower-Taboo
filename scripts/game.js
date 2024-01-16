@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function loadGame() {
     // dynamically load game content
     const gameContainer = document.getElementById('game-container');
-    gameContainer.innerHTML = '<h1>Welcome to Taboo Game!</h1>';
+    gameContainer.innerHTML = '<h1>Welcome to Baby Shower Taboo Game!</h1>';
 
     // save and retrieve data using storage.js
     const exampleData = { score: 0, currentPlayer: 'Player 1' };
