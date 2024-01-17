@@ -38,7 +38,7 @@ function App() {
         <div id="game-container">
           {/* Game content will be dynamically loaded here */}
           <button id="myButton" className="btn btn-primary">
-            Click Me nows!
+            Click Me nowssss!
           </button>
         </div>
       </div>
