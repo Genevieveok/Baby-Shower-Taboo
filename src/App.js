@@ -8,10 +8,10 @@ const shuffleTabooCards = (drawPile) => {
 
 function App() {
   const tabooData = [
-    { guessWord: 'Apple', tabooWords: ['Fruit', 'Red', 'Tree'] },
-    { guessWord: 'Orange', tabooWords: ['Fruit', 'Red', 'Tree'] },
-    { guessWord: 'peas', tabooWords: ['Fruit', 'Green', 'Pod'] },
-    { guessWord: 'goat', tabooWords: ['Fruit', 'Red', 'Tree'] },
+    { guessWord: 'Apple', tabooWords: ['Fruit', 'Red', 'Tree','Adam','Eve'] },
+    { guessWord: 'Orange', tabooWords: ['Fruit', 'Red', 'Tree','Adam','Eve'] },
+    { guessWord: 'peas', tabooWords: ['Fruit', 'Green', 'Pod', 'Adam','Eve'] },
+    { guessWord: 'goat', tabooWords: ['Fruit', 'Red', 'Tree', 'Adam','Eve'] },
   ];
 
   const [maxRounds, setMaxRounds] = useState(3);
@@ -220,11 +220,17 @@ const handleTaboo = () => {
               <button onClick={handlePass} disabled={buttonsDisabled || drawPile.length === 0}>
                 Pass
               </button>
-              <button onClick={handleCorrect} disabled={buttonsDisabled || drawPile.length === 0}>
+              {/* <button className="button" onClick={handleCorrect} disabled={buttonsDisabled || drawPile.length === 0}>
                 Correct
+              </button> */}
+              <button
+              className={`button ${buttonsDisabled || drawPile.length === 0 ? 'disabled' : ''}`}
+              onClick={handleCorrect}
+              disabled={buttonsDisabled || drawPile.length === 0}>
+              Correct
               </button>
               <button onClick={handleResetGame}>Reset Game</button>
-              <button onClick={handleTaboo} disabled={buttonsDisabled || drawPile.length === 0}>
+              <button className="button" onClick={handleTaboo} disabled={buttonsDisabled || drawPile.length === 0}>
                 Taboo
               </button>
               {gameState.timer === 0 && gameState.round <= maxRounds && (

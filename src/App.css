@@ -3,9 +3,37 @@
   src: url('../public/fonts/RocherColorGX.woff2') format('woff2');
 }
 
+
+/* h1, h2, h3, h4, h5, h6, label,option {
+  font-family: 'Rocher', sans-serif;
+} */
 .App {
   text-align: center;
-  font-family: 'Rocher', sans-serif; /* Apply the 'Rocher' font to the entire App class */
+  font-family: 'Rocher',sans-serif; 
+}
+
+.button {
+  /* background-color: #04AA6D;  */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: sans-serif;
+}
+
+.button:hover {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.button:disabled,
+.button.disabled {
+  opacity: 0.7; 
+  /* filter: blur(2px);  */
+  cursor: not-allowed;
 }
 
 .App-logo {
