@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
+import Scoreboard from './scoreboard';
+
 
 const shuffleTabooCards = (drawPile) => {
   const shuffledCards = [...drawPile].sort(() => Math.random() - 0.5);
@@ -8,13 +10,14 @@ const shuffleTabooCards = (drawPile) => {
 
 function App() {
   const tabooData = [
-    { guessWord: 'Apple', tabooWords: ['Fruit', 'Red', 'Tree','Adam','Eve'] },
-    { guessWord: 'Orange', tabooWords: ['Fruit', 'Red', 'Tree','Adam','Eve'] },
-    { guessWord: 'peas', tabooWords: ['Fruit', 'Green', 'Pod', 'Adam','Eve'] },
-    { guessWord: 'goat', tabooWords: ['Fruit', 'Red', 'Tree', 'Adam','Eve'] },
+    { guessWord: 'Apple', tabooWords: ['Fruit', 'Red', 'Tree','ADAM','EVE'] },
+    { guessWord: 'Orange', tabooWords: ['Fruit', 'Red', 'Tree','ADAM','EVE'] },
+    { guessWord: 'peas', tabooWords: ['Fruit', 'Green', 'Pod', 'ADAM','EVE']},
+    { guessWord: 'goat', tabooWords: ['Fruit', 'Red', 'Tree', 'ADAM','EVE'] },
   ];
 
   const [maxRounds, setMaxRounds] = useState(3);
+  const [maxTime, setMaxTime] = useState(30);
   const [gameState, setGameState] = useState({
     round: 1,
     teamTurn: 'A',
@@ -27,6 +30,7 @@ function App() {
   const [currentCard, setCurrentCard] = useState(tabooData[0]);
   const [drawPile, setDrawPile] = useState([...tabooData]);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
+  const [passedCards, setPassedCards] = useState([]);
 
   const handleTimeout = useCallback(() => {
     setGameState((prev) => {
@@ -44,9 +48,9 @@ function App() {
 
     if (gameState.roundNum + 1 === maxRounds && gameState.teamTurn === 'B') {
       setButtonsDisabled(true);
-      console.log(`Game Over!!!!\nTeam A: ${gameState.score.A}, Team B: ${gameState.score.B}`);
+      // console.log(`Game Over!!!!\nTeam A: ${gameState.score.A}, Team B: ${gameState.score.B}`);
     }
-  }, [maxRounds, gameState.roundNum, gameState.teamTurn, gameState.score.A, gameState.score.B]);
+  }, [maxRounds, gameState.roundNum, gameState.teamTurn]);
 
   useEffect(() => {
     if (gameState.timer > 0) {
@@ -60,21 +64,24 @@ function App() {
     }
   }, [gameState.timer, handleTimeout]);
 
+
   useEffect(() => {
     if (drawPile.length > 0) {
       setCurrentCard(drawPile[0]);
     }
   }, [drawPile]);
 
+
   const startTimer = () => {
     const validRounds = Math.min(maxRounds, 3);
     if (gameState.round <= validRounds) {
-      setGameState((prev) => ({ ...prev, timer: 4, gameStarted: true }));
+      setGameState((prev) => ({ ...prev, timer: maxTime, gameStarted: true }));
       if (gameState.teamTurn === 'B') {
         setGameState((prev) => ({ ...prev, roundNum: gameState.roundNum + 1 }));
       }
     }
   };
+
 
   const continueGame = () => {
     const nextTeam = gameState.teamTurn === 'A' ? 'B' : 'A';
@@ -91,48 +98,51 @@ function App() {
     }
   };
 
+  // const handlePass = () => {
+  //   if (gameState.gameStarted && gameState.timer > 0){
+  //     const passedCard = drawPile[gameState.currentCardIndex];
+
+  //     const nextCardIndex = (gameState.currentCardIndex + 1) % drawPile.length;
+  //     setCurrentCard(drawPile[nextCardIndex]);
+  //     setDrawPile((prev) => [
+  //       ...prev.slice(0, gameState.currentCardIndex),
+  //       ...prev.slice(gameState.currentCardIndex + 1),
+  //       passedCard,
+  //     ]);
+  //     setGameState((prev) => ({ ...prev, currentCardIndex: nextCardIndex }));
+  //   }
+  // };
+
+  
   const handlePass = () => {
-    const passedCard = drawPile[gameState.currentCardIndex];
+    if (gameState.gameStarted && gameState.timer > 0) {
+      setGameState((prev) => {
+        let nextCardIndex = (prev.currentCardIndex + 1) % drawPile.length;
 
-    const nextCardIndex = (gameState.currentCardIndex + 1) % drawPile.length;
-    setCurrentCard(drawPile[nextCardIndex]);
-    setDrawPile((prev) => [
-      ...prev.slice(0, gameState.currentCardIndex),
-      ...prev.slice(gameState.currentCardIndex + 1),
-      passedCard,
-    ]);
-    setGameState((prev) => ({ ...prev, currentCardIndex: nextCardIndex }));
+        // Check for immediate repetition and adjust nextCardIndex
+        while (passedCards.includes(drawPile[nextCardIndex].guessWord) && passedCards.length < drawPile.length) {
+          nextCardIndex = (nextCardIndex + 1) % drawPile.length;
+        }
+
+        setCurrentCard(drawPile[nextCardIndex]);
+
+        return {
+          ...prev,
+          currentCardIndex: nextCardIndex,
+        };
+      });
+
+      setPassedCards((prev) => [...prev, currentCard.guessWord]);
+    }
   };
-
-
-// const handleCorrect = () => {
-//   if (gameState.gameStarted && gameState.timer > 0 && drawPile.length > 0) {
-//     setGameState((prev) => ({
-//       ...prev,
-//       score: {
-//         ...prev.score,
-//         [prev.teamTurn]: prev.score[prev.teamTurn] + 1,
-//       },
-//       currentCardIndex: (prev.currentCardIndex + 1) % drawPile.length,
-//     }));
-//     console.log('draw pile length:',drawPile.length)
-
-//     setDrawPile((prev) => {
-//       const nextCardIndex = (gameState.currentCardIndex + 1) % prev.length;
-//       setCurrentCard(prev[nextCardIndex]);
-//       return shuffleTabooCards([...prev.slice(0, gameState.currentCardIndex), ...prev.slice(gameState.currentCardIndex + 1)]);
-//     });
-//   } else {
-//     console.log('draw pile length after:',drawPile.length)
-//   }
-// };
+  
 
 const handleCorrect = () => {
   if (gameState.gameStarted && gameState.timer > 0 && drawPile.length > 0) {
     setGameState((prev) => {
       const nextCardIndex = (prev.currentCardIndex + 1) % drawPile.length;
       setCurrentCard(drawPile[nextCardIndex]);
-      console.log('draw pile length:', drawPile.length);
+
       return {
         ...prev,
         score: {
@@ -142,24 +152,30 @@ const handleCorrect = () => {
         currentCardIndex: nextCardIndex,
       };
     });
-
-    setDrawPile((prev) => shuffleTabooCards([...prev.slice(0, gameState.currentCardIndex), ...prev.slice(gameState.currentCardIndex + 1)]));
+    setDrawPile((prev) => shuffleTabooCards(prev.slice(1))); // Only shuffle remaining cards
   } else {
     console.log('draw pile length after:', drawPile.length);
   }
 };
 
 
-
 const handleTaboo = () => {
-  const nextCardIndex = (gameState.currentCardIndex + 1) % drawPile.length;
+  if (gameState.gameStarted && gameState.timer > 0) {
+    setGameState((prev) => {
+      const nextCardIndex = (prev.currentCardIndex + 1) % drawPile.length;
+      setCurrentCard(drawPile[nextCardIndex]);
 
-  if (drawPile.length > 0) {
-    setCurrentCard(drawPile[nextCardIndex]);
-    setDrawPile((prev) => shuffleTabooCards([...prev.slice(0, gameState.currentCardIndex), ...prev.slice(gameState.currentCardIndex + 1)]));
-    setGameState((prev) => ({ ...prev, currentCardIndex: nextCardIndex }));
+      return {
+        ...prev,
+        currentCardIndex: nextCardIndex,
+      };
+    });
+
+    setDrawPile((prev) => shuffleTabooCards(prev.slice(1))); // Only shuffle remaining cards
   }
 };
+
+
 
   const handleResetGame = () => {
     setGameState({
@@ -174,15 +190,23 @@ const handleTaboo = () => {
     const shuffledCards = shuffleTabooCards(tabooData);
     setDrawPile(shuffledCards);
     setButtonsDisabled(false);
+    setPassedCards([]);
   };
 
   const renderGameOverContent = () => {
     if (drawPile.length === 0) {
-      return <h1>Game Over because cards are finished</h1>;
+      return <h1>Game Over! No more cards &#x1F622;</h1>;
     }
 
     if (gameState.roundNum + 1 === maxRounds && gameState.teamTurn === 'B' && gameState.timer === 0) {
-      return <h1>Game Over. Scores: Team A - {gameState.score.A}, Team B - {gameState.score.B}</h1>;
+      // return <h1>Game Over. Scores: Team A - {gameState.score.A}, Team B - {gameState.score.B}</h1>;
+      if (gameState.score.A > gameState.score.B) {
+        return <h1>Team A are the Winners!! &#x1F389;</h1>
+      } else if (gameState.score.A < gameState.score.B) {
+        return <h1>Team B are the Winners!! &#x1F389;</h1>
+      } else {
+        return <h1>It's a Tie!!&#x1F389; </h1>
+      }
     }
     return null;
   };
@@ -193,67 +217,84 @@ const handleTaboo = () => {
         <div id="game-container">
           {gameState.gameStarted ? (
             <>
-              <h1>Round {gameState.roundNum + 1}</h1>
+              <h1>ROUND {gameState.roundNum + 1}</h1>
               <h2>Team {gameState.teamTurn}'s Turn</h2>
+              <Scoreboard score={gameState.score} />
+              <br></br>
               <h3>Timer: {gameState.timer} seconds</h3>
-              <h4>Score: Team A - {gameState.score.A}, Team B - {gameState.score.B}</h4>
+              {/* <h4>Score: Team A - {gameState.score.A}, Team B - {gameState.score.B}</h4> */}
               {currentCard && (
                 <div>
-                  {/* <h5>Current Card: {currentCard.guessWord}</h5>
-                  <ul>
-                    {currentCard.tabooWords.map((taboo, index) => (
-                      <li key={index}>{taboo}</li>
-                    ))}
-                  </ul> */}
                   <div class="taboo-card">
-                  <div class="title-box">
-                    <div class="card-title">{currentCard.guessWord}</div>
+                    <div class="title-box">
+                      <div class="card-title">{currentCard.guessWord}</div>
                     </div>
                     <ul class="taboo-words">
-                    {currentCard.tabooWords.map((taboo, index) => (
+                      {currentCard.tabooWords.map((taboo, index) => (
                       <li key={index}>{taboo}</li>
-                    ))}
+                      ))}
                     </ul>
                   </div>
                 </div>
               )}
-              <button onClick={handlePass} disabled={buttonsDisabled || drawPile.length === 0}>
-                Pass
-              </button>
+              
               {/* <button className="button" onClick={handleCorrect} disabled={buttonsDisabled || drawPile.length === 0}>
                 Correct
               </button> */}
               <button
-              className={`button ${buttonsDisabled || drawPile.length === 0 ? 'disabled' : ''}`}
+              className={`buttoncorrect ${buttonsDisabled || drawPile.length === 0 ? 'disabled' : ''}`}
               onClick={handleCorrect}
               disabled={buttonsDisabled || drawPile.length === 0}>
               Correct
               </button>
-              <button onClick={handleResetGame}>Reset Game</button>
-              <button className="button" onClick={handleTaboo} disabled={buttonsDisabled || drawPile.length === 0}>
+              <button className="button"  onClick={handlePass} disabled={buttonsDisabled || drawPile.length === 0}>
+                Pass
+              </button>
+              <button className="buttontaboo" onClick={handleTaboo} disabled={buttonsDisabled || drawPile.length === 0}>
                 Taboo
               </button>
+              <br></br>
+              <br></br>
               {gameState.timer === 0 && gameState.round <= maxRounds && (
                 <button onClick={continueGame} disabled={buttonsDisabled || drawPile.length === 0}>
-                  Continue
+                  Next Turn
                 </button>
               )}
+              <br></br>
+              <br></br>
+              <button onClick={handleResetGame}>Reset Game</button>
+              <br></br>
+              <br></br>
             </>
           ) : (
             <>
-              <h1>Welcome to Baby Shower Taboo Game!</h1>
+              <h1>Baby Shower Taboo!</h1>
+              <br></br>
               <div>
-                <label>Choose the number of rounds:</label>
+                <label>Select number of rounds:</label>
                 <select value={maxRounds} onChange={(e) => setMaxRounds(parseInt(e.target.value, 10))}>
                   <option value={1}>1 Round</option>
                   <option value={2}>2 Rounds</option>
                   <option value={3}>3 Rounds</option>
                 </select>
               </div>
+              <br></br>
+              <div>
+                <label>Set game duration:</label>
+                <select value={maxTime} onChange={(e) => setMaxTime(parseInt(e.target.value, 10))}>
+                <option value={15}>15 Seconds</option>
+                  <option value={30}>30 Seconds</option>
+                  <option value={60}>60 Seconds</option>
+                  <option value={90}>90 Seconds</option>
+                  <option value={120}>120 Seconds</option>
+                </select>
+              </div>
+              <br></br>
               <button onClick={startTimer}>Start Game</button>
             </>
           )}
           {renderGameOverContent()}
+          <br></br>
         </div>
       </div>
     </div>

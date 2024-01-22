@@ -4,34 +4,106 @@
 }
 
 
-/* h1, h2, h3, h4, h5, h6, label,option {
-  font-family: 'Rocher', sans-serif;
-} */
 .App {
   text-align: center;
-  /* font-family: 'Rocher',sans-serif;  */
+  font-family: 'Rocher', sans-serif; 
 }
+
+/* h1, h2, h3, h4, h5, h6, label, option {
+  font-family: 'Rocher', sans-serif;
+} */
+
+/* .h1,
+.title-box,
+.card-title,
+.taboo-words { */
+  /* Apply 'sans-serif' as a fallback for these specific elements */
+  /* font-family: sans-serif;
+} */
 
 .button {
   /* background-color: #04AA6D;  */
   border: none;
-  color: white;
+  color: black;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  margin: 4px 2px;
+  margin: 10px 6px;
   cursor: pointer;
   font-family: sans-serif;
+  padding: 6px 20px;
+  font-size: 20px;
+  border-radius: 35px;
+  box-shadow: 0px 18px 15px rgba(0, 0, 0, 0.1);
+  background-color:white;
 }
 
 .button:hover {
-  background-color: #04AA6D;
+  background-color: rgba(255, 255, 255, 0.396);
   color: white;
 }
 
 .button:disabled,
 .button.disabled {
-  opacity: 0.7; 
+  opacity: 0.6; 
+  /* filter: blur(2px);  */
+  cursor: not-allowed;
+}
+
+.buttoncorrect {
+  /* background-color: #04AA6D;  */
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px 6px;
+  cursor: pointer;
+  font-family: sans-serif;
+  padding: 6px 20px;
+  font-size: 20px;
+  border-radius: 35px;
+  box-shadow: 0px 18px 15px rgba(0, 0, 0, 0.1);
+  background-color:#f5cb56;
+}
+
+.buttoncorrect:hover {
+  background-color: rgb(219, 194, 119);
+  color: white;
+}
+
+.buttoncorrect:disabled,
+.buttoncorrect.disabled {
+  opacity: 0.4; 
+  /* filter: blur(2px);  */
+  cursor: not-allowed;
+}
+
+.buttontaboo {
+  /* background-color: #04AA6D;  */
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px 6px;
+  cursor: pointer;
+  font-family: sans-serif;
+  padding: 6px 20px;
+  font-size: 20px;
+  border-radius: 35px;
+  box-shadow: 0px 18px 15px rgba(0, 0, 0, 0.1);
+  background-color:#62dafb;
+}
+
+.buttontaboo:hover {
+  background-color: rgb(167, 216, 230);
+  color: white;
+}
+
+.buttontaboo:disabled,
+.buttontaboo.disabled {
+  opacity: 0.4; 
   /* filter: blur(2px);  */
   cursor: not-allowed;
 }

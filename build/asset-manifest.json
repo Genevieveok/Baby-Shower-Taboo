@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Baby-Shower-Taboo/static/css/main.bd6d8320.css",
-    "main.js": "/Baby-Shower-Taboo/static/js/main.a6f1f7eb.js",
+    "main.css": "/Baby-Shower-Taboo/static/css/main.d69460a1.css",
+    "main.js": "/Baby-Shower-Taboo/static/js/main.73f700d5.js",
     "static/js/787.fedceb0a.chunk.js": "/Baby-Shower-Taboo/static/js/787.fedceb0a.chunk.js",
     "static/media/adi-goldstein-Hli3R6LKibo-unsplash.jpg": "/Baby-Shower-Taboo/static/media/adi-goldstein-Hli3R6LKibo-unsplash.7136dc706a71ca29d1b5.jpg",
     "static/media/RocherColorGX.woff2": "/Baby-Shower-Taboo/static/media/RocherColorGX.4a090c7e01d86739981f.woff2",
     "index.html": "/Baby-Shower-Taboo/index.html",
-    "main.bd6d8320.css.map": "/Baby-Shower-Taboo/static/css/main.bd6d8320.css.map",
-    "main.a6f1f7eb.js.map": "/Baby-Shower-Taboo/static/js/main.a6f1f7eb.js.map",
+    "main.d69460a1.css.map": "/Baby-Shower-Taboo/static/css/main.d69460a1.css.map",
+    "main.73f700d5.js.map": "/Baby-Shower-Taboo/static/js/main.73f700d5.js.map",
     "787.fedceb0a.chunk.js.map": "/Baby-Shower-Taboo/static/js/787.fedceb0a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bd6d8320.css",
-    "static/js/main.a6f1f7eb.js"
+    "static/css/main.d69460a1.css",
+    "static/js/main.73f700d5.js"
   ]
 }
