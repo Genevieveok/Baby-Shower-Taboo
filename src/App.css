@@ -1,5 +1,11 @@
+@font-face {
+  font-family: 'Rocher';
+  src: url('../public/fonts/RocherColorGX.woff2') format('woff2');
+}
+
 .App {
   text-align: center;
+  font-family: 'Rocher', sans-serif; /* Apply the 'Rocher' font to the entire App class */
 }
 
 .App-logo {
@@ -35,4 +41,42 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.taboo-card {
+  background-color: #fff;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: auto; /* Center the taboo card horizontally */
+  margin-top: 50px; /* Add some top margin for better visual appearance */
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+
+.title-box {
+  background-color: #61dafb; /* Background color of the bordered box */
+  border: 2px solid #333; /* Color of the border */
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+
+.taboo-words {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.taboo-words li {
+  font-size: 20px;
+  margin-bottom: 5px;
 }
