@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Scoreboard from './scoreboard';
+import { tabooData } from './storage';  
 
 
 const shuffleTabooCards = (drawPile) => {
@@ -9,14 +10,8 @@ const shuffleTabooCards = (drawPile) => {
 };
 
 function App() {
-  const tabooData = [
-    { guessWord: 'Apple', tabooWords: ['Fruit', 'Red', 'Tree','ADAM','EVE'] },
-    { guessWord: 'Orange', tabooWords: ['Fruit', 'Red', 'Tree','ADAM','EVE'] },
-    { guessWord: 'peas', tabooWords: ['Fruit', 'Green', 'Pod', 'ADAM','EVE']},
-    { guessWord: 'goat', tabooWords: ['Fruit', 'Red', 'Tree', 'ADAM','EVE'] },
-  ];
 
-  const [maxRounds, setMaxRounds] = useState(3);
+  const [maxRounds, setMaxRounds] = useState(2);
   const [maxTime, setMaxTime] = useState(30);
   const [gameState, setGameState] = useState({
     round: 1,
@@ -30,7 +25,60 @@ function App() {
   const [currentCard, setCurrentCard] = useState(tabooData[0]);
   const [drawPile, setDrawPile] = useState([...tabooData]);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
-  const [passedCards, setPassedCards] = useState([]);
+  // const [passedCards, setPassedCards] = useState([]);
+  const [showWinnerModal, setShowWinnerModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
+  const closeWinnerModal = () => {
+    setShowWinnerModal(false);
+  };
+
+  const closeErrorModal = () => {
+    setShowErrorModal(false);
+  };
+
+  const WinnerModal = ({ onClose, winner }) => {
+    let message = '';
+    switch (winner) {
+      case 'A':
+        message = <h1>Victory for Team A!! &#x1F389;</h1>;
+        break;
+      case 'B':
+        message = <h1>Victory for Team B!! &#x1F389;</h1>;
+        break;
+      default:
+        message = <h1>It's a Tie!! &#x1F389;</h1>;
+    }
+  
+    return (
+      <div className={`modal ${showWinnerModal ? 'modal-visible' : ''}`}>
+        <div className="modal-content">
+          <span className="close-button" onClick={onClose}>&times;</span>
+          {message}
+        </div>
+      </div>
+    );
+  };
+
+  const ErrorModal = ({ onClose, error }) => {
+    let message = '';
+    switch (error) {
+      case 'no cards left':
+        message = <h1>Game Over! No more cards &#x1F622;</h1>;
+        break;
+      default:
+        message = <h1>Game Over! Please Reset Game.</h1>;
+    }
+  
+    return (
+      <div className={`modal ${showErrorModal ? 'modal-visible' : ''}`}>
+        <div className="modal-content">
+          <span className="close-button" onClick={onClose}>&times;</span>
+          {message}
+        </div>
+      </div>
+    );
+  };
 
   const handleTimeout = useCallback(() => {
     setGameState((prev) => {
@@ -50,6 +98,7 @@ function App() {
       setButtonsDisabled(true);
       // console.log(`Game Over!!!!\nTeam A: ${gameState.score.A}, Team B: ${gameState.score.B}`);
     }
+    setShowErrorModal(false);
   }, [maxRounds, gameState.roundNum, gameState.teamTurn]);
 
   useEffect(() => {
@@ -98,43 +147,29 @@ function App() {
     }
   };
 
+  // The 'handlePass' functionality is temporarily disabled because the 'taboo' feature may serve as a substitute for passing
+  // Additionally, there is an intermittent bug observed during the transition from 'pass' to 'correct,' where card changes may not occur promptly.
   // const handlePass = () => {
-  //   if (gameState.gameStarted && gameState.timer > 0){
-  //     const passedCard = drawPile[gameState.currentCardIndex];
+  //   if (gameState.gameStarted && gameState.timer > 0) {
+  //     setGameState((prev) => {
+  //       let nextCardIndex = (prev.currentCardIndex + 1) % drawPile.length;
 
-  //     const nextCardIndex = (gameState.currentCardIndex + 1) % drawPile.length;
-  //     setCurrentCard(drawPile[nextCardIndex]);
-  //     setDrawPile((prev) => [
-  //       ...prev.slice(0, gameState.currentCardIndex),
-  //       ...prev.slice(gameState.currentCardIndex + 1),
-  //       passedCard,
-  //     ]);
-  //     setGameState((prev) => ({ ...prev, currentCardIndex: nextCardIndex }));
+  //       // Check for immediate repetition and adjust nextCardIndex
+  //       while (passedCards.includes(drawPile[nextCardIndex].guessWord) && passedCards.length < drawPile.length) {
+  //         nextCardIndex = (nextCardIndex + 1) % drawPile.length;
+  //       }
+
+  //       setCurrentCard(drawPile[nextCardIndex]);
+
+  //       return {
+  //         ...prev,
+  //         currentCardIndex: nextCardIndex,
+  //       };
+  //     });
+
+  //     setPassedCards((prev) => [...prev, currentCard.guessWord]);
   //   }
   // };
-
-  
-  const handlePass = () => {
-    if (gameState.gameStarted && gameState.timer > 0) {
-      setGameState((prev) => {
-        let nextCardIndex = (prev.currentCardIndex + 1) % drawPile.length;
-
-        // Check for immediate repetition and adjust nextCardIndex
-        while (passedCards.includes(drawPile[nextCardIndex].guessWord) && passedCards.length < drawPile.length) {
-          nextCardIndex = (nextCardIndex + 1) % drawPile.length;
-        }
-
-        setCurrentCard(drawPile[nextCardIndex]);
-
-        return {
-          ...prev,
-          currentCardIndex: nextCardIndex,
-        };
-      });
-
-      setPassedCards((prev) => [...prev, currentCard.guessWord]);
-    }
-  };
   
 
 const handleCorrect = () => {
@@ -153,8 +188,6 @@ const handleCorrect = () => {
       };
     });
     setDrawPile((prev) => shuffleTabooCards(prev.slice(1))); // Only shuffle remaining cards
-  } else {
-    console.log('draw pile length after:', drawPile.length);
   }
 };
 
@@ -190,26 +223,38 @@ const handleTaboo = () => {
     const shuffledCards = shuffleTabooCards(tabooData);
     setDrawPile(shuffledCards);
     setButtonsDisabled(false);
-    setPassedCards([]);
+    // setPassedCards([]);
   };
+
+  useEffect(() => {
+    
+    if (gameState.roundNum + 1 === maxRounds && gameState.teamTurn === 'B' && gameState.timer === 0) {
+      setShowWinnerModal(true);
+    }
+
+    if (drawPile.length === 0 ) {
+      setShowErrorModal(true);
+    }
+  }, [gameState.roundNum, maxRounds, gameState.teamTurn, gameState.timer, gameState.score.A, gameState.score.B, drawPile.length]);
 
   const renderGameOverContent = () => {
-    if (drawPile.length === 0) {
-      return <h1>Game Over! No more cards &#x1F622;</h1>;
+    if (showErrorModal) {
+      return <ErrorModal onClose={closeErrorModal} error={'no cards left'} />;
     }
-
-    if (gameState.roundNum + 1 === maxRounds && gameState.teamTurn === 'B' && gameState.timer === 0) {
-      // return <h1>Game Over. Scores: Team A - {gameState.score.A}, Team B - {gameState.score.B}</h1>;
-      if (gameState.score.A > gameState.score.B) {
-        return <h1>Team A are the Winners!! &#x1F389;</h1>
-      } else if (gameState.score.A < gameState.score.B) {
-        return <h1>Team B are the Winners!! &#x1F389;</h1>
-      } else {
-        return <h1>It's a Tie!!&#x1F389; </h1>
-      }
+  
+    let champ = ''
+    if (gameState.score.A > gameState.score.B){
+      champ = 'A'
+    } else if (gameState.score.A < gameState.score.B){
+      champ = 'B'
     }
+    if (showWinnerModal) {
+      return <WinnerModal onClose={closeWinnerModal} winner={champ} />;
+    }
+  
     return null;
   };
+  
 
   return (
     <div className="App">
@@ -221,15 +266,14 @@ const handleTaboo = () => {
               <h2>Team {gameState.teamTurn}'s Turn</h2>
               <Scoreboard score={gameState.score} />
               <br></br>
-              <h3>Timer: {gameState.timer} seconds</h3>
-              {/* <h4>Score: Team A - {gameState.score.A}, Team B - {gameState.score.B}</h4> */}
+              {gameState.timer === 0 ? <h3>Time's Up!</h3> : <h3>Time: {gameState.timer} seconds</h3>}
               {currentCard && (
                 <div>
-                  <div class="taboo-card">
-                    <div class="title-box">
-                      <div class="card-title">{currentCard.guessWord}</div>
+                  <div className="taboo-card">
+                    <div className="title-box">
+                      <div className="card-title">{currentCard.guessWord}</div>
                     </div>
-                    <ul class="taboo-words">
+                    <ul className="taboo-words">
                       {currentCard.tabooWords.map((taboo, index) => (
                       <li key={index}>{taboo}</li>
                       ))}
@@ -237,21 +281,17 @@ const handleTaboo = () => {
                   </div>
                 </div>
               )}
-              
-              {/* <button className="button" onClick={handleCorrect} disabled={buttonsDisabled || drawPile.length === 0}>
-                Correct
+              <button className="buttontaboo" onClick={handleTaboo} disabled={buttonsDisabled || drawPile.length === 0}>
+              &#x2716;
+              </button> 
+              {/* <button className="button"  onClick={handlePass} disabled={buttonsDisabled || drawPile.length === 0}>
+                Pass
               </button> */}
               <button
               className={`buttoncorrect ${buttonsDisabled || drawPile.length === 0 ? 'disabled' : ''}`}
               onClick={handleCorrect}
               disabled={buttonsDisabled || drawPile.length === 0}>
-              Correct
-              </button>
-              <button className="button"  onClick={handlePass} disabled={buttonsDisabled || drawPile.length === 0}>
-                Pass
-              </button>
-              <button className="buttontaboo" onClick={handleTaboo} disabled={buttonsDisabled || drawPile.length === 0}>
-                Taboo
+              &#x2714;
               </button>
               <br></br>
               <br></br>
@@ -271,7 +311,7 @@ const handleTaboo = () => {
               <h1>Baby Shower Taboo!</h1>
               <br></br>
               <div>
-                <label>Select number of rounds:</label>
+                <label style={{ marginRight: '6px' }}>Select number of rounds:</label>
                 <select value={maxRounds} onChange={(e) => setMaxRounds(parseInt(e.target.value, 10))}>
                   <option value={1}>1 Round</option>
                   <option value={2}>2 Rounds</option>
@@ -280,7 +320,7 @@ const handleTaboo = () => {
               </div>
               <br></br>
               <div>
-                <label>Set game duration:</label>
+                <label style={{ marginRight: '6px' }}>Set game duration:</label>
                 <select value={maxTime} onChange={(e) => setMaxTime(parseInt(e.target.value, 10))}>
                 <option value={15}>15 Seconds</option>
                   <option value={30}>30 Seconds</option>

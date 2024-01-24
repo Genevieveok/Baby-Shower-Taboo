@@ -9,18 +9,6 @@
   font-family: 'Rocher', sans-serif; 
 }
 
-/* h1, h2, h3, h4, h5, h6, label, option {
-  font-family: 'Rocher', sans-serif;
-} */
-
-/* .h1,
-.title-box,
-.card-title,
-.taboo-words { */
-  /* Apply 'sans-serif' as a fallback for these specific elements */
-  /* font-family: sans-serif;
-} */
-
 .button {
   /* background-color: #04AA6D;  */
   border: none;
@@ -61,14 +49,20 @@
   cursor: pointer;
   font-family: sans-serif;
   padding: 6px 20px;
-  font-size: 20px;
+  font-size: 23px;
   border-radius: 35px;
-  box-shadow: 0px 18px 15px rgba(0, 0, 0, 0.1);
-  background-color:#f5cb56;
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3); 
+  background: linear-gradient(to bottom, rgb(9, 169, 12) 0%, rgb(9, 169, 12) 50%, rgb(7, 128, 9) 100%);
+  /* background-color:#f5cb56; */
+  background-color:rgb(9, 169, 12);
+  font-weight: bold;
 }
 
 .buttoncorrect:hover {
-  background-color: rgb(219, 194, 119);
+  /* background-color: rgb(219, 194, 119); */
+  background-color:rgb(108, 196, 109);
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(to bottom, rgb(108, 196, 109) 0%, rgb(108, 196, 109) 50%, rgb(77, 140, 78) 100%);
   color: white;
 }
 
@@ -90,14 +84,19 @@
   cursor: pointer;
   font-family: sans-serif;
   padding: 6px 20px;
-  font-size: 20px;
+  font-size: 23px;
   border-radius: 35px;
-  box-shadow: 0px 18px 15px rgba(0, 0, 0, 0.1);
-  background-color:#62dafb;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(to bottom, #d21330 0%, #d21330 50%, #a60f27 100%);
+  /* background-color:#62dafb; */
+  background-color:#d21330;
 }
 
 .buttontaboo:hover {
-  background-color: rgb(167, 216, 230);
+  /* background-color: rgb(167, 216, 230); */
+  background-color: #e15e72;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3), 0 8px 8px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, #e15e72 0%, #e15e72 50%, #ad4c5a 100%);
   color: white;
 }
 
@@ -150,8 +149,8 @@
   padding: 20px;
   width: 300px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: auto; /* Center the taboo card horizontally */
-  margin-top: 50px; /* Add some top margin for better visual appearance */
+  margin: auto; 
+  margin-top: 50px; 
 }
 
 .card-title {
@@ -162,8 +161,8 @@
 
 
 .title-box {
-  background-color: #61dafb; /* Background color of the bordered box */
-  border: 2px solid #333; /* Color of the border */
+  background-color: #61dafb; 
+  border: 2px solid #333; 
   border-radius: 8px;
   padding: 10px;
   margin-bottom: 10px;
@@ -179,4 +178,39 @@
 .taboo-words li {
   font-size: 20px;
   margin-bottom: 5px;
+  letter-spacing: 1.1px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-visible {
+  display: block;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 30px; 
+  cursor: pointer;
 }
