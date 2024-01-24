@@ -24,7 +24,7 @@ The project was initiated using [Create React App](https://github.com/facebook/c
 
 ## Local Development
 
-To run the game locally, follow these steps:
+After cloning the code to your local environment, follow these steps to run the game locally:
 
 1. Navigate to the project root directory:
 
@@ -71,6 +71,7 @@ git checkout -b gh-pages
 4. Merge changes from `main`, and then push to the `gh-pages` branch:
 ```
 git reset --hard main
+git push origin gh-pages --force
 ```
 5. Deploy to GitHub Pages: 
 ```
