@@ -281,7 +281,7 @@ const handleTaboo = () => {
                   </div>
                 </div>
               )}
-              <button className="buttontaboo" onClick={handleTaboo} disabled={buttonsDisabled || drawPile.length === 0}>
+              <button className="buttontaboo" onClick={handleTaboo} disabled={buttonsDisabled || drawPile.length === 0 || gameState.timer === 0}>
               &#x2716;
               </button> 
               {/* <button className="button"  onClick={handlePass} disabled={buttonsDisabled || drawPile.length === 0}>
@@ -290,7 +290,7 @@ const handleTaboo = () => {
               <button
               className={`buttoncorrect ${buttonsDisabled || drawPile.length === 0 ? 'disabled' : ''}`}
               onClick={handleCorrect}
-              disabled={buttonsDisabled || drawPile.length === 0}>
+              disabled={buttonsDisabled || drawPile.length === 0|| gameState.timer === 0}>
               &#x2714;
               </button>
               <br></br>
