@@ -92,14 +92,10 @@ This command will build the application and deploy it to the `gh-pages` branch, 
 <img src="images/home.png"  width="440" height="650">
 <br>
 <br>
-<br>
 <img src="images/start.png"  width="440" height="650">
 <br>
 <br>
-<br>
 <img src="images/paused.png"  width="440" height="650">
-<br>
-<br>
 <br>
 
 ### Enjoy your baby shower celebration and happy coding! :)
