@@ -82,11 +82,24 @@ npm run deploy
 
 This command will build the application and deploy it to the `gh-pages` branch, making it accessible at `https://<username>.github.io/Baby-Shower-Taboo/`.
 
-### Directory Structure
+## Directory Structure
 * `src:` Contains the source code for the React application.
 * `public:` Includes the public assets and the HTML template for the application.
 * `build:` Holds the production build of the application.
 * `public/images:` Stores images used in the project.
   
+## How It Looks
+<img src="images/home.png"  width="440" height="650">
+<br>
+<br>
+<br>
+<img src="images/start.png"  width="440" height="650">
+<br>
+<br>
+<br>
+<img src="images/paused.png"  width="440" height="650">
+<br>
+<br>
+<br>
 
-Enjoy your baby shower celebration and happy coding!
+### Enjoy your baby shower celebration and happy coding! :)
