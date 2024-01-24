@@ -50,7 +50,9 @@ You may also see any lint errors in the console.
 
 
 ## Deployment to GitHub Pages
-The Baby Shower Taboo Game can be deployed to GitHub Pages for online accessibility. After cloning the code to your local environment, follow these steps:
+The Baby Shower Taboo Game can be deployed to GitHub Pages for online accessibility. Detailed instructions can be found on the [react-gh-pages repo](https://github.com/gitname/react-gh-pages?tab=readme-ov-file#deploying-a-react-app-to-github-pages).
+
+After cloning the code to your local environment, follow these steps:
 
 1. Change the "homepage" value in the `package.json` file to your GitHub username:
 ```
@@ -73,7 +75,7 @@ git checkout -b gh-pages
 git reset --hard main
 git push origin gh-pages --force
 ```
-5. Deploy to GitHub Pages: 
+5. Deploy to GitHub Pages ([More info on this](https://github.com/gitname/react-gh-pages?tab=readme-ov-file#8-configure-github-pages)): 
 ```
 npm run deploy
 ```
