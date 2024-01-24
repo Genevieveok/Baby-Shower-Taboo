@@ -320,7 +320,7 @@ const handleTaboo = () => {
               </div>
               <br></br>
               <div>
-                <label style={{ marginRight: '6px' }}>Set game duration:</label>
+                <label style={{ marginRight: '6px' }}>Set round duration:</label>
                 <select value={maxTime} onChange={(e) => setMaxTime(parseInt(e.target.value, 10))}>
                 <option value={15}>15 Seconds</option>
                   <option value={30}>30 Seconds</option>

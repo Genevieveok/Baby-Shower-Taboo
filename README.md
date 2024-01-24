@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Baby Shower Taboo Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This repository contains a Baby Shower Taboo Game, a web application built with React. The game is designed for baby shower celebrations, providing an entertaining and interactive experience for participants. 
+I personally built this game for a friend's baby shower, and it was a total hit! :)
 
-In the project directory, you can run:
+## Game Description
 
-### `npm start`
+The Baby Shower Taboo Game is a digital version of the classic [Taboo game](https://playtaboo.com/rules-of-the-taboo-game/) with a baby shower theme. Players take turns trying to guess a word without using specific **taboo** words associated with it. The game includes a set of predefined words and taboo words related to baby showers and parenting. 
 
-Runs the app in the development mode.\
+### Additional Game Information
+* The game involves two teams, with Team A initiating the gameplay.
+* Players can customize the number of rounds and set a time duration for each round according to their preferences.
+* The (&#10003;) button, or **Correct** button, enables users to award their team a point when they successfully guess a word.
+* The (X) button, or **Taboo** button, allows users to skip a card they find challenging or want to pass on.
+* The winning team is determined by the highest accumulated points at the end of the game.
+* Players have the flexibility of unlimited passes during the game.
+* A total of 90 cards are available, ensuring a diverse and engaging gameplay experience.
+
+## Dependencies
+
+The project was initiated using [Create React App](https://github.com/facebook/create-react-app), a popular tool for bootstrapping React applications. The primary dependencies include Node.js, npm (Node Package Manager), React, and other related packages. 
+
+## Local Development
+
+To run the game locally, follow these steps:
+
+1. Navigate to the project root directory:
+
+```
+cd Baby-Shower-Taboo
+```
+2.  Install dependencies:
+
+```
+npm install
+```
+
+3. Start the development server:
+```
+npm start
+```
+
+This runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Deployment to GitHub Pages
+The Baby Shower Taboo Game can be deployed to GitHub Pages for online accessibility. After cloning the code to your local environment, follow these steps:
 
-### `npm run build`
+1. Change the "homepage" value in the `package.json` file to your GitHub username:
+```
+"homepage": "https://<username>.github.io/Baby-Shower-Taboo/",
+```
+2. Make sure your changes are committed and pushed to the `main` branch (This maintains a record of your source code):
+```
+git checkout main
+git add .
+git commit -m "Your commit message"
+git push origin main
+```
+3. Create `gh-pages` Branch and switch to it:
+```
+git checkout -b gh-pages
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Merge changes from `main`, and then push to the `gh-pages` branch:
+```
+git reset --hard main
+```
+5. Deploy to GitHub Pages: 
+```
+npm run deploy
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This command will build the application and deploy it to the `gh-pages` branch, making it accessible at `https://<username>.github.io/Baby-Shower-Taboo/`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Directory Structure
+* `src:` Contains the source code for the React application.
+* `public:` Includes the public assets and the HTML template for the application.
+* `build:` Holds the production build of the application.
+* `public/images:` Stores images used in the project.
+  
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Enjoy your baby shower celebration and happy coding!
