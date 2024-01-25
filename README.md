@@ -7,13 +7,15 @@ I personally built this game for a friend's baby shower, and it was a total hit!
 
 ## Game Description
 
-The Baby Shower Taboo Game is a digital version of the classic [Taboo game](https://playtaboo.com/rules-of-the-taboo-game/) with a baby shower theme. Players take turns trying to guess a word without using specific **taboo** words associated with it. The game includes a set of predefined words and taboo words related to baby showers and parenting. 
+The Baby Shower Taboo Game is a digital version of the classic [Taboo game](https://playtaboo.com/rules-of-the-taboo-game/) with a baby shower theme. Players take turns trying to get their team to guess a word without dropping any of those **Taboo** words that usually go with it. The game includes a set of predefined words and taboo words related to babies and parenting. 
 
 ### Additional Game Information
 * The game involves two teams, with Team A initiating the gameplay.
 * Players can customize the number of rounds and set a time duration for each round according to their preferences.
 * The (&#10003;) button, or **Correct** button, enables users to award their team a point when they successfully guess a word.
 * The (X) button, or **Taboo** button, allows users to skip a card they find challenging or want to pass on.
+* Players tap the **Next Turn** button to switch to the next team's round after one team finishes their turn - when the timer runs out.
+* Players can tap the **Reset Game** button to initiate a game restart.
 * The winning team is determined by the highest accumulated points at the end of the game.
 * Players have the flexibility of unlimited passes during the game.
 * A total of 90 cards are available, ensuring a diverse and engaging gameplay experience.
