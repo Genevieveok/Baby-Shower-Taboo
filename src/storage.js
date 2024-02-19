@@ -58,7 +58,7 @@ export const tabooDataTest = [
     { guessWord: 'Uterus', tabooWords: ['Womb', 'Eggs', 'Sex', 'Baby', 'Ovaries'] },
     { guessWord: 'Pediatrician', tabooWords: ['Baby', 'Doctor', 'Born', 'Infant', 'Shots'] },
     { guessWord: 'Lamaze', tabooWords: ['Classes', 'Breathing', 'Exercise', 'Couple', 'Baby'] },
-    { guessWord: 'Bottle', tabooWords: ['Nipple', 'Milk', 'Comfort', 'Feed', 'Drinks'] },
+    { guessWord: 'Nipple', tabooWords: ['Breast', 'Milk', 'Bite', 'Feed', 'Suck'] },
     { guessWord: 'Home Birth', tabooWords: ['Place', 'Born', 'Hospital', 'Deliver', 'Doctor'] },
     { guessWord: 'Car Seat', tabooWords: ['Drive', 'Sleeps', 'Chair', 'Leave', 'Belt'] },
     { guessWord: 'Bath', tabooWords: ['Water', 'Tub', 'Shower', 'Soap', 'Bubbles'] },
