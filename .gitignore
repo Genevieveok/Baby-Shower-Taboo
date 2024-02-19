@@ -1,6 +1,0 @@
-# .gitignore
-
-# Node modules
-.DS_Store/
-node_modules/
-
