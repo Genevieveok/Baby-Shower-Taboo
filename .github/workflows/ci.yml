@@ -41,7 +41,7 @@ jobs:
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main'
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT }}
       run: |
         git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
         npm install gh-pages --save-dev
