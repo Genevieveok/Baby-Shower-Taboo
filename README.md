@@ -20,9 +20,31 @@ The Baby Shower Taboo Game is a digital version of the classic [Taboo game](http
 * Players have the flexibility of unlimited passes during the game.
 * A total of 90 cards are available, ensuring a diverse and engaging gameplay experience.
 
+
 ## Dependencies
 
 The project was initiated using [Create React App](https://github.com/facebook/create-react-app), a popular tool for bootstrapping React applications. The primary dependencies include Node.js, npm (Node Package Manager), React, and other related packages. 
+
+
+## Continuous Integration (CI)
+
+This repository utilizes GitHub Actions for Continuous Integration (CI) to ensure code quality and successful deployment. You can choose to integrate it into your personal workflow.
+
+### Dependency
+- Generate a Personal Access Token (PAT) by going to GitHub `Settings > Developer settings > Personal access tokens`.
+- Name it `PAT` and add it as a secret in the repository under `Settings > Secrets and variables > Actions`.
+
+The CI pipeline is defined in `.github/workflows/ci.yml` and includes the following steps:
+- Checkout the code.
+- Set up the Node.js environment.
+- Install dependencies.
+- Verify React installation.
+- Run tests.
+- Build the project.
+- Set git user for deployment.
+- Deploy to GitHub Pages.
+
+The CI pipeline is triggered on every push to the `main` branch and on pull requests to `main`.
 
 ## Local Development
 
