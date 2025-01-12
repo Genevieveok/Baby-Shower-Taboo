@@ -25,16 +25,15 @@ The Baby Shower Taboo Game is a digital version of the classic [Taboo game](http
 
 The project was initiated using [Create React App](https://github.com/facebook/create-react-app), a popular tool for bootstrapping React applications. The primary dependencies include Node.js, npm (Node Package Manager), React, and other related packages. 
 
+## Continuous Integration (CI) and Continuous Deployment (CD)
 
-## Continuous Integration (CI)
-
-This repository utilizes GitHub Actions for Continuous Integration (CI) to ensure code quality and successful deployment. You can choose to integrate it into your personal workflow.
+This repository utilizes GitHub Actions for Continuous Integration (CI) and Continuous Deployment (CD) to ensure code quality and successful deployment. You can choose to integrate it into your personal workflow.
 
 ### Dependency
 - Generate a Personal Access Token (PAT) by going to GitHub `Settings > Developer settings > Personal access tokens`.
 - Name it `PAT` and add it as a secret in the repository under `Settings > Secrets and variables > Actions`.
 
-The CI pipeline is defined in `.github/workflows/ci.yml` and includes the following steps:
+The CI/CD pipeline is defined in `.github/workflows/ci.yml` and includes the following steps:
 - Checkout the code.
 - Set up the Node.js environment.
 - Install dependencies.
@@ -44,7 +43,7 @@ The CI pipeline is defined in `.github/workflows/ci.yml` and includes the follow
 - Set git user for deployment.
 - Deploy to GitHub Pages.
 
-The CI pipeline is triggered on every push to the `main` branch and on pull requests to `main`.
+The CI/CD pipeline is triggered on every push to the `main` branch and on pull requests to `main`. The deployment to GitHub Pages is handled automatically, so there's no need to manually deploy from your local environment.
 
 ## Local Development
 
